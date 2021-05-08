@@ -9,6 +9,7 @@
         "devconjugate": "babel-node -- src/index.js"
     },
     "dependencies": {
+        "hangul-js": "^0.2.6",
         "yargs": "^17.0.1"
     },
     "devDependencies": {

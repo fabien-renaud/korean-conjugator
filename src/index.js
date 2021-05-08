@@ -1,5 +1,6 @@
 import yargs from 'yargs';
 import {conjugate} from './domain/conjugation';
+import {isVerb} from './domain/conjugation/utils';
 
 const argv = yargs
     .usage('Conjugate a Korean verb')
@@ -15,8 +16,8 @@ const argv = yargs
         type: 'string'
     })
     .option('politeness', {
-        alias: 'c',
-        default: 'banmal',
+        alias: 'p',
+        default: 'informalHigh',
         description: 'Politeness level to use',
         type: 'string'
     })
@@ -30,10 +31,11 @@ const verb = argv.verb ?? argv._[0] ?? undefined;
 
 // Parameters whitelist
 const allowedTense = ['present'];
-const allowedPoliteness = ['banmal'];
+const allowedPoliteness = ['informalLow', 'informalHigh', 'formalHigh'];
 
 // Validate parameters
 if (!verb) throw 'No verb provided';
+if (!isVerb(verb)) throw "Word provided isn't a verb";
 if (!allowedTense.includes(tense)) throw 'Tense not allowed';
 if (!allowedPoliteness.includes(politeness)) throw 'Politeness not allowed';
 
