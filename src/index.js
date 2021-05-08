@@ -1,4 +1,5 @@
 import yargs from 'yargs';
+import {conjugate} from './domain/conjugation';
 
 const argv = yargs
     .usage('Conjugate a Korean verb')
@@ -23,6 +24,19 @@ const argv = yargs
     .alias('help', 'h')
     .argv;
 
-const {verb, tense, politeness} = argv;
-const argumentVerb = argv._[0];
-console.log(`${tense}/${politeness} form for ${verb ?? argumentVerb}: 있어요`);
+// Options values
+const {tense, politeness} = argv;
+const verb = argv.verb ?? argv._[0] ?? undefined;
+
+// Parameters whitelist
+const allowedTense = ['present'];
+const allowedPoliteness = ['banmal'];
+
+// Validate parameters
+if (!verb) throw 'No verb provided';
+if (!allowedTense.includes(tense)) throw 'Tense not allowed';
+if (!allowedPoliteness.includes(politeness)) throw 'Politeness not allowed';
+
+const conjugatedVerb = conjugate(verb, tense, politeness);
+
+console.log(`${tense}/${politeness} form for ${verb}: ${conjugatedVerb}`);
