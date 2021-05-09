@@ -15,6 +15,18 @@ npm run build
 npm run conjugate -- [ -v verb | verb ] [options]
 ```
 
+If you are using Linux or Git Bash terminal, you can create an alias:
+```
+# Dont forget to change /path/to
+echo alias conjugate=\'npm run conjugate --prefix=/path/to/korean-conjugator --silent --\' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Then, use
+```sh
+conjugate [ -v verb | verb ] [options]
+```
+
 ## Options
 | Option | Default | Allowed values | Description |
 |---|---|---|---|
