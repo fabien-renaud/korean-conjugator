@@ -34,6 +34,17 @@ conjugate [ -v verb | verb ] [options]
 | `-t`, `--tense` | `present` | `past`, `present` | Tense to use |
 | `-p`, `--politeness` | `informalPolite` | `formalPolite`, `informalPolite`, `informalCasual` | Politeness level to use |
 
+## Includes
+Korean Conjugator is under development, and may not handle some special cases or irregular verbs.
+If this is this the case, do not hesitate to open an [issue](https://github.com/fabien-renaud/korean-conjugator/issues/new).
+Here is an explicit of what Korean Conjugator currently handles:
+- `past` / `present` tense
+- `formal polite` / `informal polite` / `informal casual` politeness levels
+- `하다` verbs
+- Regular verbs with/without final (중성)
+- Following irregulars:
+    - None at the moment
+
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/fabien-renaud/korean-conjugator/issues).
