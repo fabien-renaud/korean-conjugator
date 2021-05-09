@@ -19,7 +19,7 @@ npm run conjugate -- [ -v verb | verb ] [options]
 | Option | Default | Allowed values | Description |
 |---|---|---|---|
 | `-v`, `--verb`, `[verb]` | | | Verb to conjugate |
-| `-t`, `--tense` | `present` | `present` | Tense to use |
+| `-t`, `--tense` | `present` | `past`, `present` | Tense to use |
 | `-p`, `--politeness` | `informalPolite` | `formalPolite`, `informalPolite`, `informalCasual` | Politeness level to use |
 
 ## 🤝 Contributing

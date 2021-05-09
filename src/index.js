@@ -29,7 +29,7 @@ const {tense, politeness} = argv;
 const verb = argv.verb ?? argv._[0] ?? undefined;
 
 // Parameters whitelist
-const allowedTense = ['present'];
+const allowedTense = ['past', 'present'];
 const allowedPoliteness = ['formalPolite', 'informalPolite', 'informalCasual'];
 
 // Validate parameters
