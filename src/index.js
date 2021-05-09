@@ -17,13 +17,12 @@ const argv = yargs
     })
     .option('politeness', {
         alias: 'p',
-        default: 'informalHigh',
+        default: 'informalPolite',
         description: 'Politeness level to use',
         type: 'string'
     })
     .help()
-    .alias('help', 'h')
-    .argv;
+    .alias('help', 'h').argv;
 
 // Options values
 const {tense, politeness} = argv;
@@ -31,7 +30,7 @@ const verb = argv.verb ?? argv._[0] ?? undefined;
 
 // Parameters whitelist
 const allowedTense = ['present'];
-const allowedPoliteness = ['informalLow', 'informalHigh', 'formalHigh'];
+const allowedPoliteness = ['formalPolite', 'informalPolite', 'informalCasual'];
 
 // Validate parameters
 if (!verb) throw 'No verb provided';
@@ -39,6 +38,6 @@ if (!isVerb(verb)) throw "Word provided isn't a verb";
 if (!allowedTense.includes(tense)) throw 'Tense not allowed';
 if (!allowedPoliteness.includes(politeness)) throw 'Politeness not allowed';
 
-const conjugatedVerb = conjugate(verb, tense, politeness);
+const conjugatedVerb = conjugate[`${tense}/${politeness}`](verb);
 
 console.log(`${tense}/${politeness} form for ${verb}: ${conjugatedVerb}`);
