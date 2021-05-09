@@ -1,6 +1,16 @@
 import {composeJamos, decomposeVerb} from '../utils';
 
-const verbEnding = (lastJamoEnding) => {
+const withFinalEnding = (lastJamoEnding) => {
+    switch (lastJamoEnding) {
+        case 'ㅏ':
+        case 'ㅗ':
+            return '아';
+        default:
+            return '어';
+    }
+};
+
+const withoutFinalEnding = (lastJamoEnding) => {
     switch (lastJamoEnding) {
         case '하':
             return 'ㅐ';
@@ -8,21 +18,23 @@ const verbEnding = (lastJamoEnding) => {
             return 'ㅏ';
         case 'ㅗ':
             return 'ㅘ';
+        case 'ㅜ':
+            return 'ㅝ';
         case 'ㅣ':
             return 'ㅕ';
-        default:
+        case 'ㅡ':
             return 'ㅓ';
+        case 'ㅓ':
+            return 'ㅓ';
+        default:
+            return `${lastJamoEnding}어`;
     }
 };
 
-const replaceCases = ['하', 'ㅏ', 'ㅗ', 'ㅓ', 'ㅣ', 'ㅡ'];
-
 const conjugateToPresentInformalCasual = (verb) => {
     const {verbStem, lastJamo} = decomposeVerb(verb);
-    if (!lastJamo.hasFinal && replaceCases.includes(lastJamo.ending)) {
-        return composeJamos(...verbStem.slice(0, -1), verbEnding(lastJamo.ending));
-    }
-    return composeJamos(...verbStem, 'ㅇ', verbEnding(lastJamo.ending));
+    if (lastJamo.hasFinal) return composeJamos(...verbStem, withFinalEnding(lastJamo.ending));
+    return composeJamos(...verbStem.slice(0, -1), withoutFinalEnding(lastJamo.ending))
 };
 
 export default conjugateToPresentInformalCasual;

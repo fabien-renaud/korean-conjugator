@@ -3,6 +3,7 @@ import conjugateToPastInformalPolite from './informalPolite';
 const useCases = [
     {verb: '하다', expects: '했어요'},
     {verb: '좋아하다', expects: '좋아했어요'},
+    {verb: '있다', expects: '있었어요'},
     {verb: '보다', expects: '봤어요'},
     {verb: '가다', expects: '갔어요'},
     {verb: '먹다', expects: '먹었어요'},

@@ -3,6 +3,7 @@ import conjugateToPastInformalCasual from './informalCasual';
 const useCases = [
     {verb: '하다', expects: '했어'},
     {verb: '좋아하다', expects: '좋아했어'},
+    {verb: '있다', expects: '있었어'},
     {verb: '보다', expects: '봤어'},
     {verb: '가다', expects: '갔어'},
     {verb: '먹다', expects: '먹었어'},

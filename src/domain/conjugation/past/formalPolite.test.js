@@ -3,6 +3,7 @@ import conjugateToPastFormalPolite from './formalPolite';
 const useCases = [
     {verb: '하다', expects: '했습니다'},
     {verb: '좋아하다', expects: '좋아했습니다'},
+    {verb: '있다', expects: '있었습니다'},
     {verb: '보다', expects: '봤습니다'},
     {verb: '가다', expects: '갔습니다'},
     {verb: '먹다', expects: '먹었습니다'},
