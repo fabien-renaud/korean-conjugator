@@ -35,6 +35,7 @@ const withoutFinalEnding = (lastJamoEnding) => {
 const conjugateToPresentInformalCasual = (verb) => {
     const irregularRule = findIrregularRule(verb);
     const {verbStem, lastJamo} = irregularRule ? decomposeIrregularVerb(verb, irregularRule) : decomposeVerb(verb);
+    if (irregularRule?.flagStop) return composeJamos(...verbStem);
     if (lastJamo.hasFinal) return composeJamos(...verbStem, withFinalEnding(lastJamo.ending));
     return composeJamos(...verbStem.slice(0, -1), withoutFinalEnding(lastJamo.ending));
 };

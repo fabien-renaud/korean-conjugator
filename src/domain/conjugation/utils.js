@@ -3,11 +3,15 @@ import hangul from 'hangul-js';
 export const isVerb = (verb) => /다$/.test(verb);
 
 export const decomposeIrregularVerb = (verb, rule) => {
-    const stringVerb = hangul.disassemble(verb);
-    const transformedVerb = rule.transform(stringVerb);
+    const disassembledVerb = hangul.disassemble(verb);
+    const transformedVerb = rule.transform(disassembledVerb);
+    const {ending, hasFinal} = rule.lastJamo;
     return {
         verbStem: transformedVerb,
-        lastJamo: rule.lastJamo
+        lastJamo: {
+            ending: ending ?? transformedVerb.slice(hasFinal ? -2 : -1)[0],
+            hasFinal
+        }
     }
 };
 
