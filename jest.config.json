@@ -1,0 +1,6 @@
+{
+    "name": "korean-conjugator",
+    "collectCoverage": true,
+    "verbose": true,
+    "testPathIgnorePatterns": ["/dist"]
+}
