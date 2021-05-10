@@ -1,4 +1,4 @@
-import {isVerb, decomposeVerb, composeJamos} from './utils';
+import {isVerb, decomposeIrregularVerb, decomposeVerb, composeJamos} from './utils';
 
 describe('isVerb', () => {
     const dataset = ['하다', '먹다', '마시다'];
@@ -12,6 +12,24 @@ describe('isVerb', () => {
     wrongDataset.map((verb) => {
         test(`${verb} is not a verb`, () => {
             expect(isVerb(verb)).toBe(false);
+        });
+    });
+});
+
+describe('decomposeIrregular', () => {
+    const rule = {
+        // Bieup 오 - Replace ㅂ with 오
+        transform: (stringVerb) => [...stringVerb.slice(0, -3), 'ㅇ', 'ㅗ'],
+        lastJamo: {ending: 'ㅗ', hasFinal: false},
+        list: ['돕다', '곱다']
+    };
+    const dataset = [
+        {verb: '돕다', expects: {verbStem: ['ㄷ', 'ㅗ', 'ㅇ', 'ㅗ'], lastJamo: {ending: 'ㅗ', hasFinal: false}}},
+        {verb: '곱다', expects: {verbStem: ['ㄱ', 'ㅗ', 'ㅇ', 'ㅗ'], lastJamo: {ending: 'ㅗ', hasFinal: false}}}
+    ];
+    dataset.map(({verb, expects}) => {
+        test(`${verb} equals ${expects}`, () => {
+            expect(decomposeIrregularVerb(verb, rule)).toEqual(expects);
         });
     });
 });
