@@ -1,5 +1,5 @@
 import yargs from 'yargs';
-import {conjugate} from './domain/conjugation';
+import {conjugateTo} from './domain/conjugation';
 import {isVerb} from './domain/conjugation/utils';
 
 const argv = yargs
@@ -38,6 +38,6 @@ if (!isVerb(verb)) throw "Word provided isn't a verb";
 if (!allowedTense.includes(tense)) throw 'Tense not allowed';
 if (!allowedPoliteness.includes(politeness)) throw 'Politeness not allowed';
 
-const conjugatedVerb = conjugate[`${tense}/${politeness}`](verb);
+const conjugatedVerb = conjugateTo(tense, politeness, verb);
 
 console.log(`${tense}/${politeness} form for ${verb}: ${conjugatedVerb}`);
