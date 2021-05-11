@@ -5,11 +5,11 @@ export const isVerb = (verb) => /다$/.test(verb);
 export const decomposeIrregularVerb = (verb, rule) => {
     const disassembledVerb = hangul.disassemble(verb);
     const transformedVerb = rule.transform(disassembledVerb);
-    const {ending, hasFinal} = rule.lastJamo;
+    const {ending, vowelPosition, hasFinal} = rule.lastJamoParams;
     return {
         verbStem: transformedVerb,
         lastJamo: {
-            ending: ending ?? transformedVerb.slice(hasFinal ? -2 : -1)[0],
+            ending: ending ?? transformedVerb.slice(vowelPosition)[0],
             hasFinal
         }
     }
