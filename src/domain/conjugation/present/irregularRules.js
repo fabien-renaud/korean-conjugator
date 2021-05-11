@@ -1,10 +1,19 @@
+import hangul from 'hangul-js';
+
 // prettier-ignore
 const irregularRules = [
     {
-        // 이다 - Special verb
-        transform: (disassembledVerb) => [...disassembledVerb.slice(0, -2), '에'],
+        // 이다 - Unique verb
+        transform: (disassembledVerb) => [...disassembledVerb.slice(0, -2), 'ㅇ', 'ㅔ'],
         lastJamoParams: {ending: 'ㅔ', hasFinal: false},
         list: ['이다'],
+        flagStop: true // Stop the treatment here
+    },
+    {
+        // 되다 - Unique verb
+        transform: (disassembledVerb) => [...disassembledVerb.slice(0, -3), 'ㅐ'],
+        lastJamoParams: {ending: 'ㅐ', hasFinal: false},
+        list: ['되다'],
         flagStop: true // Stop the treatment here
     },
     {
@@ -49,25 +58,32 @@ const irregularRules = [
         list: ['하얗다'],
         flagStop: true // Stop the treatment here
     },
-    // {
-    //     // Rieul - Remove final ㄹ when followed by ㄴ, ㅂ or ㅅ
-    //     transform: (disassembledVerb) => disassembledVerb.slice(0, -3),
-    //     lastJamoParams: {ending: undefined, vowelPosition: -1, hasFinal: false},
-    //     list: []
-    // },
-    // {
-    //     // Reu - Remove ㅡ and add ㄹ to the previous jamo
-    //     transform: (disassembledVerb) => [...disassembledVerb.slice(0, -3), 'ㄹ'],
-    //     lastJamoParams: {ending: undefined, vowelPosition: -3, hasFinal: false},
-    //     list: []
-    // },
+    {
+        // Rieul - Remove final ㄹ when followed by ㄴ, ㅂ or ㅅ
+        transform: (disassembledVerb) => disassembledVerb.slice(0, -3),
+        lastJamoParams: {ending: undefined, vowelPosition: -1, hasFinal: false},
+        pattern: /[ㄴㅂㅅ]ㄷㅏ$/
+    },
+    {
+        // Reu - Remove ㅡ and add ㄹ to the previous jamo
+        transform: (disassembledVerb) => [...disassembledVerb.slice(0, -3), 'ㄹ'],
+        lastJamoParams: {ending: undefined, vowelPosition: -3, hasFinal: false},
+        pattern: /ㄹㄷㅏ$/
+    },
     {
         // 따르다 - Special verb
         transform: (disassembledVerb) => [...disassembledVerb.slice(0, -3), 'ㅏ'],
         lastJamoParams: {ending: 'ㅡ', hasFinal: false},
         list: ['따르다'],
         flagStop: true // Stop the treatment here
+    },
+    {
+        // Eu - Remove ㅡ - Don't apply to 2 syllables verbs like 쓰다
+        transform: (disassembledVerb) => disassembledVerb.slice(0, -2),
+        lastJamoParams: {ending: undefined, vowelPosition: -4, hasFinal: false},
+        pattern: /.{3,}ㅡㄷㅏ$/
     }
 ];
 
-export const findIrregularRule = (verb) => irregularRules.filter((rule) => rule.list.includes(verb))[0] ?? null;
+const matchOrIncludes = (verb) => ({list, pattern}) => pattern?.test(hangul.disassemble(verb).join('')) || list?.includes(verb);
+export const findIrregularRule = (verb) => irregularRules.filter(matchOrIncludes(verb))[0] ?? null;

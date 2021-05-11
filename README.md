@@ -50,9 +50,11 @@ Here is an explicit of what Korean Conjugator currently handles:
 | `ㄷ` | `Implemented` | 5 | 듣다, 걷다, 깨닫다, 묻다, 싣다 |
 | `ㅅ` | `Implemented` | 6 | 낫다, 짓다, 긋다, 잇다, 붓다, 젓다 |
 | `ㅎ` | `Implemented` | 7 | 노랗다, 빨갛다, 까맣다, 파갛다, 그렇다, 어떻다, 하얗다 |
-| `ㄹ` | `In progress` |  |  |
-| `르` | `In progress` |  |  |
-| `으` | `In progress` |  |  |
+| `ㄹ` | `Implemented` | All |  |
+| `르` | `Implemented` | All |  |
+| `으` | `Implemented` | All |  |
+| `이다` | `Implemented` | | |
+| `되다` | `Implemented` | | |
 
 *source: https://www.koreanwikiproject.com/wiki/Category:Irregular_verbs*
 
