@@ -1,31 +1,27 @@
-import hangul from 'hangul-js';
+import hangulJs from 'hangul-js';
+import {arrayIncludes, findLast, last, pipe} from '../../fp';
+import {CONSONANTS, VOWELS} from './constants';
 
-export const isVerb = (verb) => /다$/.test(verb);
-
-export const decomposeIrregularVerb = (verb, rule) => {
-    const disassembledVerb = hangul.disassemble(verb);
-    const transformedVerb = rule.transform(disassembledVerb);
-    const {ending, vowelPosition, hasFinal} = rule.lastJamoParams;
-    return {
-        verbStem: transformedVerb,
-        lastJamo: {
-            ending: ending ?? transformedVerb.slice(vowelPosition)[0],
-            hasFinal
-        }
-    }
-};
+export const isVerb = (hangul) => /(?:다|ㄷㅏ)$/.test(hangul);
+export const isHadaVerb = (hangul) => /(?:하다|ㅎㅏㄷㅏ)$/.test(hangul);
+export const isConsonant = arrayIncludes(CONSONANTS);
+export const isVowel = arrayIncludes(VOWELS);
+export const endsWithConsonant = pipe(last, isConsonant);
+export const findLastConsonant = findLast(isConsonant);
+export const findLastVowel = findLast(isVowel);
 
 export const decomposeVerb = (verb) => {
-    const {verbStem, lastJamo} = /(?<verbStem>.*(?<lastJamo>.))다$/.exec(verb)?.groups ?? {};
-    const disassembledVerbStem = hangul.disassemble(verbStem);
-    const disassembledLastJamo = hangul.disassemble(lastJamo);
+    const disassembledVerb = hangulJs.disassemble(verb).join('');
+    const {verbStem} = /(?<verbStem>.*)ㄷㅏ$/.exec(disassembledVerb)?.groups ?? {};
     return {
-        verbStem: disassembledVerbStem,
-        lastJamo: {
-            ending: lastJamo === '하' ? '하' : disassembledLastJamo[1],
-            hasFinal: disassembledLastJamo[2] !== undefined
-        }
+        verb,
+        conjugatedVerb: verbStem,
+        isHada: isHadaVerb(verb),
+        lastVowel: findLastVowel(verbStem),
+        lastConsonant: findLastConsonant(verbStem),
+        hasFinal: endsWithConsonant(verbStem),
+        skipRegularStage: false
     };
 };
 
-export const composeJamos = (...args) => hangul.assemble(hangul.disassemble(args));
+export const composeVerb = (decomposedVerb) => hangulJs.assemble(decomposedVerb.conjugatedVerb);
