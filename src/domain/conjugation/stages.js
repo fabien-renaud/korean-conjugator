@@ -24,4 +24,3 @@ const handleRegularVerbStage = (decomposedVerb) => {
  * Stages arrays used to factorise stages in conjugation pipelines
  */
 export const handleVerbStages = [handleIrregularVerbStage, handleRegularVerbStage];
-export const pastStages = [...handleVerbStages, addPastPrefix];

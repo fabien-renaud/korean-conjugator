@@ -58,6 +58,7 @@ export const irregularRules = [
          * Example: 낫다 -> 나 -> 나아(요)
          */
         transform: (conjugatedVerb) => conjugatedVerb.slice(0, -1),
+        forceHasFinal: true,
         list: ['낫다', '짓다', '긋다', '잇다', '붓다', '젓다']
     },
     {

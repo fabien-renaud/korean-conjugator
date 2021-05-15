@@ -12,7 +12,7 @@ export const handleIrregular = (decomposedVerb, rule) => {
         conjugatedVerb,
         lastVowel: findLastVowel(conjugatedVerb),
         lastConsonant: findLastConsonant(conjugatedVerb),
-        hasFinal: endsWithConsonant(conjugatedVerb),
+        hasFinal: rule.forceHasFinal ?? endsWithConsonant(conjugatedVerb),
         skipRegularStage: rule.skipRegularStage ?? false
     };
 };

@@ -12,7 +12,8 @@ export const VOWELS = [
     'ㅣ'
 ];
 
-export const PAST_PREFIX = 'ㅆ어';
+export const PAST_PREFIX_FORMAL = 'ㅆ';
+export const PAST_PREFIX_INFORMAL = 'ㅆ어';
 export const POLITE_SUFFIX = '요';
 export const FORMAL_POLITE_WITH_VOWEL_SUFFIX = 'ㅂ니다';
 export const FORMAL_POLITE_WITH_CONSONANT_SUFFIX = '습니다';
