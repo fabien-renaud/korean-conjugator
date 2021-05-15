@@ -44,8 +44,8 @@ Here is an explicit of what Korean Conjugator currently handles:
 - Regular verbs
 - Following irregulars:
 
-| | Status | Count | List |
-|---|---|---|---|
+| Rule | Status | Count | List |
+|:---:|:---:|:---:|:---|
 | `ㅂ` | `Implemented` | 24 | 돕다, 곱다, 가볍다, 고맙다, 눕다, 굽다, 귀엽다, 깁다, 까다롭다, 더럽다, 덥다, 두렵다, 맵다, 무겁다, 밉다, 반갑다, 부럽다, 아름답다, 어둡다, 어렵다, 쉽다, 줍다,즐겁다, 춥다 |
 | `ㄷ` | `Implemented` | 5 | 듣다, 걷다, 깨닫다, 묻다, 싣다 |
 | `ㅅ` | `Implemented` | 6 | 낫다, 짓다, 긋다, 잇다, 붓다, 젓다 |
@@ -53,10 +53,12 @@ Here is an explicit of what Korean Conjugator currently handles:
 | `ㄹ` | `Implemented` | All |  |
 | `르` | `Implemented` | All |  |
 | `으` | `Implemented` | All |  |
-| `이다` | `Implemented` | | |
-| `되다` | `Implemented` | | |
+| `Uniques` | `Implemented` | 3 | 이다, 되다, 따르다 |
 
 *source: https://www.koreanwikiproject.com/wiki/Category:Irregular_verbs*
+
+## Application design
+You can find design documentation [here](https://github.com/fabien-renaud/korean-conjugator/blob/master/adr).
 
 ## 🤝 Contributing
 
