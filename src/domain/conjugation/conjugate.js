@@ -1,9 +1,20 @@
-import conjugateToPast from './past';
-import conjugateToPresent from './present';
+import {
+    mainConjugationPipeline,
+    pastFormalPoliteConjugationPipeline,
+    pastInformalCasualConjugationPipeline,
+    pastInformalPoliteConjugationPipeline,
+    presentFormalPoliteConjugationPipeline,
+    presentInformalCasualConjugationPipeline,
+    presentInformalPoliteConjugationPipeline
+} from './pipelines';
 
-const conjugateToTense = {
-    past: conjugateToPast,
-    present: conjugateToPresent
+const conjugationPipelinesMap = {
+    'past/formalPolite': pastFormalPoliteConjugationPipeline,
+    'past/informalPolite': pastInformalPoliteConjugationPipeline,
+    'past/informalCasual': pastInformalCasualConjugationPipeline,
+    'present/formalPolite': presentFormalPoliteConjugationPipeline,
+    'present/informalPolite': presentInformalPoliteConjugationPipeline,
+    'present/informalCasual': presentInformalCasualConjugationPipeline
 };
 
-export const conjugateTo = (tense, politeness, verb) => conjugateToTense[tense](politeness)(verb);
+export const conjugate = (tense, politeness, verb) => mainConjugationPipeline(conjugationPipelinesMap[`${tense}/${politeness}`])(verb);

@@ -1,6 +1,5 @@
 import yargs from 'yargs';
-import {conjugateTo} from './domain/conjugation';
-import {isVerb} from './domain/conjugation/utils';
+import {conjugate, isVerb} from './domain/conjugation';
 
 const argv = yargs
     .usage('Conjugate a Korean verb')
@@ -38,6 +37,6 @@ if (!isVerb(verb)) throw "Word provided isn't a verb";
 if (!allowedTense.includes(tense)) throw 'Tense not allowed';
 if (!allowedPoliteness.includes(politeness)) throw 'Politeness not allowed';
 
-const conjugatedVerb = conjugateTo(tense, politeness, verb);
+const conjugatedVerb = conjugate(tense, politeness, verb);
 
 console.log(`${tense}/${politeness} form for ${verb}: ${conjugatedVerb}`);
