@@ -2,8 +2,9 @@ import hangulJs from 'hangul-js';
 import {arrayIncludes, pipe} from '../../fp';
 import {CONSONANTS, VOWELS} from './constants';
 
-export const isVerb = (hangul) => /.+(?:다)$/.test(hangul);
-export const isHadaVerb = (hangul) => /(?:하다)$/.test(hangul);
+export const isVerb = (hangul) => /.+다$/.test(hangul);
+export const isIdaVerb = (hangul) => /이다$/.test(hangul);
+export const isHadaVerb = (hangul) => /하다$/.test(hangul);
 export const isConsonant = arrayIncludes(CONSONANTS);
 export const isVowel = arrayIncludes(VOWELS);
 
@@ -31,9 +32,9 @@ export const baseEndingWithFinal = (lastVowel) => {
     switch (lastVowel) {
         case 'ㅏ':
         case 'ㅗ':
-            return '아';
+            return ['ㅇ', 'ㅏ'];
         default:
-            return '어';
+            return ['ㅇ', 'ㅓ'];
     }
 };
 

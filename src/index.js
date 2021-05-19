@@ -1,5 +1,5 @@
 import yargs from 'yargs';
-import {conjugate, isVerb} from './domain/conjugation';
+import {conjugate, isVerb, POLITENESS, TENSE} from './domain/conjugation';
 
 const argv = yargs
     .usage('Conjugate a Korean verb')
@@ -27,15 +27,11 @@ const argv = yargs
 const {tense, politeness} = argv;
 const verb = argv.verb ?? argv._[0] ?? undefined;
 
-// Parameters whitelist
-const allowedTense = ['past', 'present'];
-const allowedPoliteness = ['formalPolite', 'informalPolite', 'informalCasual'];
-
 // Validate parameters
 if (!verb) throw 'No verb provided';
 if (!isVerb(verb)) throw "Word provided isn't a verb";
-if (!allowedTense.includes(tense)) throw 'Tense not allowed';
-if (!allowedPoliteness.includes(politeness)) throw 'Politeness not allowed';
+if (!Object.values(TENSE).includes(tense)) throw 'Tense not allowed';
+if (!Object.values(POLITENESS).includes(politeness)) throw 'Politeness not allowed';
 
 const conjugatedVerb = conjugate(verb, tense, politeness);
 

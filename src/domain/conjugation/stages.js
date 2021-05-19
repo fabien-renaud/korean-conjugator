@@ -1,17 +1,18 @@
 import {addFormalPoliteWithConsonantSuffix, addFormalPoliteWithVowelSuffix} from './suffixes';
 import {findIrregularRule, handleIrregular} from './handleIrregular';
 import {handleRegularVerb} from './handleRegular';
+import {lastSyllableHasFinal} from './utils';
 
 /*
  * Stages allow to breakdown logic reusable process
  */
 export const formalPoliteStage = (decomposedVerb) => {
-    return decomposedVerb.hasFinal ? addFormalPoliteWithConsonantSuffix(decomposedVerb) : addFormalPoliteWithVowelSuffix(decomposedVerb);
+    return lastSyllableHasFinal(decomposedVerb.syllables) ? addFormalPoliteWithConsonantSuffix(decomposedVerb) : addFormalPoliteWithVowelSuffix(decomposedVerb);
 };
 
 export const handleIrregularVerbStage = (decomposedVerb) => {
-    // const rule = findIrregularRule(decomposedVerb);
-    // if (rule) return handleIrregular(decomposedVerb, rule);
+    const rule = findIrregularRule(decomposedVerb);
+    if (rule) return handleIrregular(decomposedVerb, rule);
     return decomposedVerb;
 };
 
