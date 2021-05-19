@@ -1,6 +1,6 @@
 import {pipe} from '../../fp';
 import {composeVerb, decomposeVerb} from './utils';
-import {formalPoliteStage, handleVerbStages} from './stages';
+import {formalPoliteStage, handleIrregularVerbStage, handleVerbStages} from './stages';
 import {addPastFormalPrefix, addPastInformalPrefix, addPoliteSuffix} from './suffixes';
 
 /*
@@ -16,6 +16,6 @@ export const mainConjugationPipeline = (conjugationPipeline) => pipe(decomposeVe
 export const pastFormalPoliteConjugationPipeline = pipe(...handleVerbStages, addPastFormalPrefix, formalPoliteStage);
 export const pastInformalPoliteConjugationPipeline = pipe(...handleVerbStages, addPastInformalPrefix, addPoliteSuffix);
 export const pastInformalCasualConjugationPipeline = pipe(...handleVerbStages, addPastInformalPrefix);
-export const presentFormalPoliteConjugationPipeline = pipe(formalPoliteStage);
+export const presentFormalPoliteConjugationPipeline = pipe(handleIrregularVerbStage, formalPoliteStage);
 export const presentInformalPoliteConjugationPipeline = pipe(...handleVerbStages, addPoliteSuffix);
 export const presentInformalCasualConjugationPipeline = pipe(...handleVerbStages);

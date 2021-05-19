@@ -1,4 +1,4 @@
-import {addFormalPoliteWithConsonantSuffix, addFormalPoliteWithVowelSuffix, addPastPrefix} from './suffixes';
+import {addFormalPoliteWithConsonantSuffix, addFormalPoliteWithVowelSuffix} from './suffixes';
 import {findIrregularRule, handleIrregular} from './handleIrregular';
 import {handleRegularVerb} from './handleRegular';
 
@@ -9,13 +9,13 @@ export const formalPoliteStage = (decomposedVerb) => {
     return decomposedVerb.hasFinal ? addFormalPoliteWithConsonantSuffix(decomposedVerb) : addFormalPoliteWithVowelSuffix(decomposedVerb);
 };
 
-const handleIrregularVerbStage = (decomposedVerb) => {
-    const rule = findIrregularRule(decomposedVerb.verb);
-    if (rule) return handleIrregular(decomposedVerb, rule);
+export const handleIrregularVerbStage = (decomposedVerb) => {
+    // const rule = findIrregularRule(decomposedVerb);
+    // if (rule) return handleIrregular(decomposedVerb, rule);
     return decomposedVerb;
 };
 
-const handleRegularVerbStage = (decomposedVerb) => {
+export const handleRegularVerbStage = (decomposedVerb) => {
     if (decomposedVerb.skipRegularStage) return decomposedVerb;
     return handleRegularVerb(decomposedVerb);
 };

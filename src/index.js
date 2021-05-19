@@ -37,6 +37,6 @@ if (!isVerb(verb)) throw "Word provided isn't a verb";
 if (!allowedTense.includes(tense)) throw 'Tense not allowed';
 if (!allowedPoliteness.includes(politeness)) throw 'Politeness not allowed';
 
-const conjugatedVerb = conjugate(tense, politeness, verb);
+const conjugatedVerb = conjugate(verb, tense, politeness);
 
 console.log(`${tense}/${politeness} form for ${verb}: ${conjugatedVerb}`);

@@ -1,51 +1,29 @@
-import {composeJamos} from './utils';
-
-const baseEndingHada = 'ㅐ';
-const baseEndingWithFinal = (lastVowel) => {
-    switch (lastVowel) {
-        case 'ㅏ':
-        case 'ㅗ':
-            return '아';
-        default:
-            return '어';
-    }
-};
-const baseEndingWithoutFinal = (lastVowel) => {
-    switch (lastVowel) {
-        case 'ㅏ':
-            return 'ㅏ';
-        case 'ㅗ':
-            return 'ㅘ';
-        case 'ㅜ':
-            return 'ㅝ';
-        case 'ㅣ':
-            return 'ㅕ';
-        case 'ㅡ':
-            return 'ㅓ';
-        case 'ㅓ':
-            return 'ㅓ';
-        default:
-            return `${lastVowel}어`;
-    }
-};
+import {
+    baseEndingHada,
+    baseEndingWithFinal,
+    baseEndingWithoutFinal,
+    isHadaVerb,
+    lastSyllableHasFinal,
+    lastSyllableVowel,
+    sliceOneJamoToLastSyllable
+} from './utils';
 
 export const handleRegularVerb = (decomposedVerb) => {
-    const {conjugatedVerb, isHada, lastVowel, hasFinal} = decomposedVerb;
-    if (isHada) {
+    const {verb, syllables} = decomposedVerb;
+    if (isHadaVerb(verb)) {
         return {
             ...decomposedVerb,
-            conjugatedVerb: `${conjugatedVerb.slice(0, -1)}${baseEndingHada}`
+            syllables: [...sliceOneJamoToLastSyllable(syllables), baseEndingHada]
         };
-    } else if (hasFinal) {
+    } else if (lastSyllableHasFinal(syllables)) {
         return {
             ...decomposedVerb,
-            conjugatedVerb: `${conjugatedVerb}${baseEndingWithFinal(lastVowel)}`,
-            hasFinal: false
+            syllables: [...syllables, baseEndingWithFinal(lastSyllableVowel(syllables))]
         };
     } else {
         return {
             ...decomposedVerb,
-            conjugatedVerb: `${conjugatedVerb.slice(0, -1)}${baseEndingWithoutFinal(lastVowel)}`
+            syllables: [...sliceOneJamoToLastSyllable(syllables), baseEndingWithoutFinal(lastSyllableVowel(syllables))]
         };
     }
 };

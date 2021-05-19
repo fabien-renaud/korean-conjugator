@@ -1,18 +1,25 @@
 import hangul from 'hangul-js';
 import {irregularRules} from './irregularRules';
-import {endsWithConsonant, findLastConsonant, findLastVowel} from './utils';
 
-const matchOrIncludes = (verb) => ({list, pattern}) => pattern?.test(hangul.disassemble(verb).join('')) || list?.includes(verb);
-export const findIrregularRule = (verb) => irregularRules.filter(matchOrIncludes(verb))[0] ?? null;
+// Either no "only" list or list includes tense/politeness
+const tensePolitenessConstraint = (rule, tense, politeness) => !rule.only || rule.only.includes(`${tense}/${politeness}`);
+// Verb matches rule's regex pattern
+const matchPatternConstraint = (rule, verb) => rule.pattern?.test(hangul.disassemble(verb).join(''));
+// Verb is included in rule's list
+const includedInListConstraint = (rule, verb) => rule.list?.includes(verb);
+
+const allConstraints = (verb, tense, politeness) => (rule) =>
+    tensePolitenessConstraint(rule, tense, politeness) && (matchPatternConstraint(rule, verb) || includedInListConstraint(rule, verb));
+
+export const findIrregularRule = (decomposedVerb) => {
+    const {verb, tense, politeness} = decomposedVerb;
+    return irregularRules.find(allConstraints(verb, tense, politeness))
+};
 
 export const handleIrregular = (decomposedVerb, rule) => {
-    const conjugatedVerb = rule.transform(decomposedVerb.conjugatedVerb);
     return {
         ...decomposedVerb,
-        conjugatedVerb,
-        lastVowel: findLastVowel(conjugatedVerb),
-        lastConsonant: findLastConsonant(conjugatedVerb),
-        hasFinal: rule.forceHasFinal ?? endsWithConsonant(conjugatedVerb),
-        skipRegularStage: rule.skipRegularStage ?? false
+        syllables: rule.transform(decomposedVerb.syllables),
+        skipRegularStage: true
     };
 };
