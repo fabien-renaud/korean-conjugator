@@ -1,4 +1,4 @@
-import {pipe} from '../../fp';
+import {pipe} from '../../utils/fp';
 import {composeVerb, decomposeVerb} from './utils';
 import {formalPoliteStage, handleIrregularVerbStage, handleVerbStages} from './stages';
 import {addPastFormalPrefix, addPastInformalPrefix, addPoliteSuffix} from './suffixes';

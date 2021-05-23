@@ -2,11 +2,11 @@
     "name": "korean-conjugator",
     "version": "1.0.0",
     "description": "Korean conjugator",
-    "main": "src/index.js",
+    "main": "src/interface/cli/index.js",
     "scripts": {
         "build": "babel src -d dist --copy-files",
-        "conjugate": "node dist/index.js",
-        "devconjugate": "babel-node -- src/index.js",
+        "conjugate": "node dist/interface/cli/index.js",
+        "devconjugate": "babel-node -- src/interface/cli/index.js",
         "test": "jest"
     },
     "dependencies": {
