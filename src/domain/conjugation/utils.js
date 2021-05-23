@@ -1,5 +1,5 @@
 import hangulJs from 'hangul-js';
-import {arrayIncludes, pipe} from '../../fp';
+import {arrayIncludes, pipe} from '../../utils/fp';
 import {CONSONANTS, VOWELS} from './constants';
 
 export const isVerb = (hangul) => /.+다$/.test(hangul);
