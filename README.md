@@ -42,7 +42,7 @@ Here is an explicit of what Korean Conjugator currently handles:
 - `formal polite` / `informal polite` / `informal casual` politeness levels
 - `하다` verbs
 - Regular verbs
-- Following irregulars:
+- Following irregulars are tested:
 
 | Rule | Status | Count | List |
 |:---:|:---:|:---:|:---|
@@ -50,10 +50,10 @@ Here is an explicit of what Korean Conjugator currently handles:
 | `ㄷ` | `Implemented` | 5 | 듣다, 걷다, 깨닫다, 묻다, 싣다 |
 | `ㅅ` | `Implemented` | 6 | 낫다, 짓다, 긋다, 잇다, 붓다, 젓다 |
 | `ㅎ` | `Implemented` | 7 | 노랗다, 빨갛다, 까맣다, 파갛다, 그렇다, 어떻다, 하얗다 |
-| `ㄹ` | `Implemented` | All |  |
-| `르` | `Implemented` | All |  |
-| `으` | `Implemented` | All |  |
-| `Uniques` | `Implemented` | 3 | 이다, 되다, 따르다 |
+| `ㄹ` | `In progress` | 20 | 가르다, 고르다, 구르다, 기르다, 나르다, 누르다, 다르다, 두르다, 마르다, 모르다, 바르다, 부르다, 빠르다, 서두르다, 오르다, 이르다, 자르다, 저지르다, 찌르다, 흐르다 |
+| `르` | `In progress` | 11 | 길다, 놀다, 들다, 만들다, 만들다, 살다, 알다, 열다, 울다, 팔다, 힘들다 |
+| `으` | `In progress` | 13 | 고프다, 아프다, 슬프다, 바쁘다, 나쁘다, 예쁘다, 기쁘다, 애쓰다, 쓰다, 끄다, 뜨다, 크다, 모으다 |
+| `Uniques` | `In progress` | 3 | 이다, 되다, 따르다 |
 
 *source: https://www.koreanwikiproject.com/wiki/Category:Irregular_verbs*
 

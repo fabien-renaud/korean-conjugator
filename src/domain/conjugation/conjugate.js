@@ -17,4 +17,4 @@ const conjugationPipelinesMap = {
     'present/informalCasual': presentInformalCasualConjugationPipeline
 };
 
-export const conjugate = (tense, politeness, verb) => mainConjugationPipeline(conjugationPipelinesMap[`${tense}/${politeness}`])(verb);
+export const conjugate = (verb, tense, politeness) => mainConjugationPipeline(conjugationPipelinesMap[`${tense}/${politeness}`])({verb, tense, politeness});

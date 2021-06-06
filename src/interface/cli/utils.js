@@ -1,0 +1,1 @@
+export const getVerb = (argv) => argv.verb ?? argv._[0] ?? undefined;

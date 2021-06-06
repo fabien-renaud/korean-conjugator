@@ -2,14 +2,19 @@
     "name": "korean-conjugator",
     "version": "1.0.0",
     "description": "Korean conjugator",
-    "main": "src/index.js",
+    "main": "src/interface/cli/index.js",
     "scripts": {
         "build": "babel src -d dist --copy-files",
-        "conjugate": "node dist/index.js",
-        "devconjugate": "babel-node -- src/index.js",
+        "cli": "node dist/interface/cli/index.js",
+        "cli:dev": "babel-node -- src/interface/cli/index.js",
+        "conjugate": "npm run cli",
+        "server": "node dist/interface/rest/index.js",
+        "server:dev": "nodemon --exec babel-node -r dotenv/config src/interface/rest/index.js",
         "test": "jest"
     },
     "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
         "hangul-js": "^0.2.6",
         "yargs": "^17.0.1"
     },
@@ -19,6 +24,7 @@
         "@babel/node": "^7.13.13",
         "@babel/plugin-proposal-throw-expressions": "^7.12.13",
         "@babel/preset-env": "^7.14.1",
+        "dotenv": "^10.0.0",
         "eslint": "^7.2.0",
         "eslint-config-airbnb": "^18.2.1",
         "eslint-config-node": "^4.1.0",
@@ -30,6 +36,7 @@
         "eslint-plugin-react": "^7.21.5",
         "eslint-plugin-react-hooks": "^1.7.0",
         "jest": "^26.6.3",
+        "nodemon": "^2.0.7",
         "prettier": "^2.2.1"
     },
     "repository": {

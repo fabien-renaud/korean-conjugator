@@ -1,7 +1,7 @@
-import {pipe} from '../../fp';
+import {pipe} from '../../utils/fp';
 import {composeVerb, decomposeVerb} from './utils';
-import {formalPoliteStage, handleVerbStages, pastStages} from './stages';
-import {addPastPrefix, addPoliteSuffix} from './suffixes';
+import {formalPoliteStage, handleIrregularVerbStage, handleVerbStages} from './stages';
+import {addPastFormalPrefix, addPastInformalPrefix, addPoliteSuffix} from './suffixes';
 
 /*
  * Inside the main pipeline, the verb is decomposed in a special format that facilitate its treatment.
@@ -13,9 +13,9 @@ export const mainConjugationPipeline = (conjugationPipeline) => pipe(decomposeVe
  * Each combination tense/politeness is handled by a specific pipeline.
  * pipe functions could be factored with mainConjugationPipeline, but we keep it for readability
  */
-export const pastFormalPoliteConjugationPipeline = pipe(...pastStages, formalPoliteStage);
-export const pastInformalPoliteConjugationPipeline = pipe(...pastStages, addPoliteSuffix);
-export const pastInformalCasualConjugationPipeline = pipe(...pastStages);
-export const presentFormalPoliteConjugationPipeline = pipe(formalPoliteStage);
+export const pastFormalPoliteConjugationPipeline = pipe(...handleVerbStages, addPastFormalPrefix, formalPoliteStage);
+export const pastInformalPoliteConjugationPipeline = pipe(...handleVerbStages, addPastInformalPrefix, addPoliteSuffix);
+export const pastInformalCasualConjugationPipeline = pipe(...handleVerbStages, addPastInformalPrefix);
+export const presentFormalPoliteConjugationPipeline = pipe(handleIrregularVerbStage, formalPoliteStage);
 export const presentInformalPoliteConjugationPipeline = pipe(...handleVerbStages, addPoliteSuffix);
 export const presentInformalCasualConjugationPipeline = pipe(...handleVerbStages);
